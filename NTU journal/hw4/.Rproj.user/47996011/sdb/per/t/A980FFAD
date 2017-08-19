@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1498758207190.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A980FFAD",
+    "lastKnownWriteTime" : 13229676095799416,
+    "last_content_update" : 1498758207190,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "E9809E2E",
+        "caption" : "answer02",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=answer02&cache_key=E9809E2E",
+        "displayedObservations" : 100,
+        "environment" : "",
+        "object" : "answer02",
+        "preview" : 0,
+        "totalObservations" : 100,
+        "variables" : 18
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

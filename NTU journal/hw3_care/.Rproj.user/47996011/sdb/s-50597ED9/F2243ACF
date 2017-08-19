@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"hw3\"\nauthor: \"r05741051_黃羽均\"\ndate: \"2017年5月16日\"\noutput: html_document\n---\n\n台灣近年老人長期照護、養護及安養機構 人力分析\n資料來源：http://www.sfaa.gov.tw/SFAA/Pages/Detail.aspx?nodeid=358&pid=3135\n\n  隨著社會進步、醫藥發達，出生率及死亡率逐年降低，台灣老年人口的比例正大幅增加，高齡化社會已成為重大議題，所產生的現象與問題也逐漸浮現。就在台灣將從「高齡化社會」邁入「高齡社會」，如何維護高齡生活的品質與尊嚴，以及訂定健全的社會福利和健康政策，已是政府刻不容緩的挑戰。\n\n  本文就衛生福利部公告之統計數據分析台灣近年之照護人力分配：\n  \n  \n  ```{r}\n\nbarplot(rdata$Total,main=\"Total\",xlab=\"year\", ylab=\"people\")\nbarplot(rdata$Administrators,main=\" Administrators\",xlab=\"year\", ylab=\"people\")\nbarplot(rdata$Nursing.Staff ,main=\"Nursing\",xlab=\"year\", ylab=\"people\")\nbarplot(rdata$Social.Workers,main=\"Social Workers\",xlab=\"year\", ylab=\"people\")\nbarplot(rdata$Serviceman,main=\"Server\",xlab=\"year\", ylab=\"people\")\n```\n",
+    "created" : 1494869390050.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3421712838",
+    "id" : "F2243ACF",
+    "lastKnownWriteTime" : 1494871406,
+    "last_content_update" : 1494871406497,
+    "path" : "C:/Users/user/Dropbox/R/R/hw3/hw3.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

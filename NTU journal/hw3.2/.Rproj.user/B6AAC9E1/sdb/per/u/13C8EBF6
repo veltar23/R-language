@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\nlibrary(plotly)\nrequire(stats)\n\nrdata = read.csv('1.csv',  header = TRUE)\n\ndf <- rdata %>% group_by(Area)\n\n\n\nlibrary(knitr)\n\nresult1 = summarise(df, mean(Grand.Total))\ncolnames(result1) = c(\"Area\",\"Total\")\nrr1 <- result1[order(result1$Total),]\nkable(rr1)\n\n\n\n\nresult2 = colMeans(df[ ,2:7])\nprint(result2)\n\n\n\nlibrary(knitr)\n\nresult3 = rdata %>% filter(Nursing.Staff < 9.666818)\nrr3<- result3[order(result3$Nursing.Staff),]\nkable(rr3)",
+    "created" : 1495455811721.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1052951707",
+    "id" : "13C8EBF6",
+    "lastKnownWriteTime" : 3419473789575321445,
+    "last_content_update" : 1495469497139,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Untitled\"\nauthor: \"r05741051_黃羽均\"\ndate: \"2017年6月11日\"\noutput: html_document\n---\n\n```{r}\nlibrary(tmcn)\nlibrary(rvest)\nlibrary(xml2)\npttTestFunction <- function(URL, filename)\n{\n  #URL   = \"https://www.ptt.cc/bbs/elderly/index.html\"\n  html  = read_html(URL)\n  title = html_nodes(html, \"a\")\n  href  = html_attr(title, \"href\")\n  data = data.frame(title = toUTF8(html_text(title)),\n                    href = href)\n  data = data[-c(1:10),]\n  getContent <- function(x) {\n    url  = paste0(\"https://www.ptt.cc\", x)\n    tag  = html_node(read_html(url), 'div#main-content.bbs-screen.bbs-content')\n    text = toUTF8(html_text(tag))\n  }\n  #getContent(data$href[1])\n  allText = sapply(data$href, getContent)\n  allText\n  #out <- file(filename, \"w\", encoding=\"BIG-5\") \n  write.table(allText, filename) \n  #close(out) \n}\n\n\nsource('pttTestFunction.R')\nid = c(1:10)\nURL = paste0(\"https://www.ptt.cc/bbs/elderly/index\", id, \".html\")\nfilename = paste0(id, \".txt\")\npttTestFunction(URL[1], filename[1])\nmapply(pttTestFunction, \n       URL = URL, filename = filename)\n\n```\n\n\n\n",
+    "created" : 1497194327539.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1205348394",
+    "id" : "B691D66A",
+    "lastKnownWriteTime" : 31244048832397314,
+    "last_content_update" : 1497195153658,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\nlibrary(ggplot2)\nlibrary(ggmap)\nlibrary(mapproj)\n\n\nuv <- read.csv(\"UV_20151116152215.csv\", encoding=\"big-5\")\n\nuv$lon <- uv$WGS84Lon\nuv$lat <- uv$WGS84Lat\n\nmap <- get_map(location = 'Taiwan', zoom = 7)\nggmap(map) + \n  geom_point(aes(x = lon, y = lat, size = uv), data = uv) +\n  scale_size(range = c(0, 30))\n\n#d <- function(x=-95.36, y=29.76, n,r,a){\n#  round(data.frame(\n#    lon = jitter(rep(x,n), amount = a),\n#    lat = jitter(rep(y,n), amount = a)\n#  ), digits = r)\n#}\n#df1 <- d(n = 50,r = 3,a = .3)\n#map <- get_googlemap(markers = df1, path = df1, scale = 2)\n#ggmap(map)\n\ndf2 <- uv[,5:6]\nnames(df2) <- c('lon', 'lat')\nmap2 <- get_googlemap(center = 'Taiwan', zoom = 7,\n                      markers = df2, path = df2, scale = 2)\nggmap(map2)\nmu <- c(-95.3632715, 29.7632836)\nnDataSets <- sample(4:10,1)\nchkpts <- NULL\nfor(k in 1:nDataSets){\n  a <- rnorm(2); b <- rnorm(2);\n  si <- 1/3000 * (outer(a,a) + outer(b,b))\n  chkpts <- rbind(chkpts,\n                  cbind(MASS::mvrnorm(rpois(1,50), jitter(mu, .01), si), k))\n}\nchkpts <- data.frame(chkpts)\nnames(chkpts) <- c(\"lon\", \"lat\",\"class\")\nchkpts$class <- factor(chkpts$class)\nqplot(lon, lat, data = chkpts, colour = class)\ndf2$uv <- as.factor(as.integer(uv$uv))\nqplot(lon, lat, data = df2, colour = uv)\n\ndf2$air <- sample(1:10, length(df2$uv), replace=T) \nggmap(get_map(location = 'taiwan', zoom = 7), extent = \"panel\") +\n  geom_point(aes(x = lon, y = lat, colour = factor(uv), size = air), data = df2) +\n  scale_size(range = c(0, 6))\n",
+    "created" : 1496809364778.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1865918409",
+    "id" : "4C6501A6",
+    "lastKnownWriteTime" : 1496821010,
+    "last_content_update" : 1496821010587,
+    "path" : "C:/Users/ASUS/Dropbox/R/R/map/mapTest.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

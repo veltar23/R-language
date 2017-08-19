@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# 首先，我們重新連線到另一個資料庫\nlibrary(RSQLite)\ndrv <- dbDriver(\"SQLite\")\ndb <- dbConnect(drv, db_path2)\n\n# 請列出現在的資料庫中的表格清單\ntb_list <- {\n  # 請填寫你的程式碼\n  dbListTables(db)\n}\n\n# 資料庫中的TWII是台灣加權指數，是透過quantmod套件從yahoo下載的數據\n# 請問同學，這段數據的日期範圍，是幾號到幾號呢？\n# 你的答案應該是一個字串\ntwii_head <- {\n  # 請填寫你的程式碼\n  dbReadTable(db, \"TWII\")$date[1]\n}\ntwii_tail <- {\n  # 請填寫你的程式碼\n  tail(dbReadTable(db, \"TWII\")$date, 1)\n}\nstopifnot(class(twii_head) == \"character\")\nstopifnot(length(twii_head) == 1)\nstopifnot(class(twii_tail) == \"character\")\nstopifnot(length(twii_tail) == 1)\n\n# 接著我們開啟一個Transaction\ndbBegin(db)\n\n# R 內建的iris資料共有三種類別，一共150筆花的量測資料\n# 請同學將屬於setosa種類（Species的值為\"setosa\"）的資料，\n# 寫入到database，並且取名為\"setosa\"\n{\n  # 請填寫你的程式碼\n  dbWriteTable(db, \"setosa\", iris[iris$Species == \"setosa\",], overwrite = TRUE)\n}\n\n# 請確實將資料寫入！\n{\n  # 請填寫你的程式碼\n  dbCommit(db)\n}\n\n# 最後，我們中斷連線\ndbDisconnect(db)\n\n# 測試程式將會檢查這個資料庫內的資料",
+    "created" : 1498661873691.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1845980000",
+    "id" : "F8FEAA61",
+    "lastKnownWriteTime" : 1498661913,
+    "last_content_update" : 1498661913287,
+    "path" : "C:/Users/user/AppData/Local/Temp/RtmpITvYHK/RDataEngineer-04-HW.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

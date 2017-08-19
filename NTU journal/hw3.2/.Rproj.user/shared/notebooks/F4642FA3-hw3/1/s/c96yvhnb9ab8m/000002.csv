@@ -1,0 +1,4 @@
+"0","library(knitr)"
+"0","result3 = rdata %>% filter(Nursing.Staff < 9.666818)"
+"0","rr3<- result3[order(result3$Nursing.Staff),]"
+"0","kable(rr3)"

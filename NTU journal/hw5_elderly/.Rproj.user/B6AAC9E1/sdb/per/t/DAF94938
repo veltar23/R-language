@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"hw5\"\nauthor: \"r05741051_黃羽均\"\ndate: \"2017年6月12日\"\noutput: html_document\n---\n```{r}\nlibrary(tmcn)\nlibrary(rvest)\npttTestFunction <- function(URL, filename)\n{\n  #URL   = \"https://www.ptt.cc/bbs/elderly/index.html\"\n  html  = read_html(URL)\n  title = html_nodes(html, \"a\")\n  href  = html_attr(title, \"href\")\n  data = data.frame(title = toUTF8(html_text(title)),\n                    href = href)\n  data = data[-c(1:10),]\n  getContent <- function(x) {\n    url  = paste0(\"https://www.ptt.cc\", x)\n    tag  = html_node(read_html(url), 'div#main-content.bbs-screen.bbs-content')\n    text = toUTF8(html_text(tag))\n  }\n  #getContent(data$href[1])\n  allText = sapply(data$href, getContent)\n  allText\n  #out <- file(filename, \"w\", encoding=\"BIG-5\") \n  write.table(allText, filename) \n  #close(out) \n}\n\n\n```\n\n\n\n```{r}\nrm(list=ls(all.names = TRUE))\nlibrary(NLP)\nlibrary(tm)\nlibrary(jiebaRD)\nlibrary(jiebaR)\nlibrary(RColorBrewer)\nlibrary(wordcloud)\n\nfilenames <- list.files(getwd(), pattern=\"*.txt\")\nfiles <- lapply(filenames, readLines)\n\ndocs <- Corpus(VectorSource(files)) \n\ntoSpace <- content_transformer(function(x, pattern) {\n  return (gsub(pattern, \" \", x))\n}\n)\n\n\ndocs <- tm_map(docs, toSpace, \"的\")\ndocs <- tm_map(docs, toSpace, \"有\")\ndocs <- tm_map(docs, toSpace, \"在\")\ndocs <- tm_map(docs, toSpace, \"是\")\ndocs <- tm_map(docs, toSpace, \"也\")\ndocs <- tm_map(docs, toSpace, \"踢踢\")\ndocs <- tm_map(docs, toSpace, \"批\")\ndocs <- tm_map(docs, toSpace, \"了\")\ndocs <- tm_map(docs, toSpace, \"發信站\")\ndocs <- tm_map(docs, toSpace, \"作者\")\ndocs <- tm_map(docs, toSpace, \"標題\")\ndocs <- tm_map(docs, toSpace, \"就\")\ndocs <- tm_map(docs, toSpace, \"都\")\ndocs <- tm_map(docs, toSpace, \"坊\")\ndocs <- tm_map(docs, toSpace, \"實業\")\ndocs <- tm_map(docs, toSpace, \"會\")\ndocs <- tm_map(docs, toSpace, \"或\")\n\n\ndocs <- tm_map(docs, removePunctuation)\ndocs <- tm_map(docs, removeNumbers)\ndocs <- tm_map(docs, stripWhitespace)\n\n\n\nmixseg = worker()\njieba_tokenizer=function(d){\n  unlist(segment(d[[1]],mixseg))\n}\nseg = lapply(docs, jieba_tokenizer)\nfreqFrame = as.data.frame(table(unlist(seg)))\n\n\nwordcloud(freqFrame$Var1,freqFrame$Freq,\n          scale=c(5,0.1),min.freq=50,max.words=150,\n          random.order=TRUE, random.color=FALSE, \n          rot.per=.1, colors=brewer.pal(8, \"Dark2\"),\n          ordered.colors=FALSE,use.r.layout=FALSE,\n          fixed.asp=TRUE)\n\n```\n\n",
+    "created" : 1497244365192.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3247521969",
+    "id" : "DAF94938",
+    "lastKnownWriteTime" : 1497244991,
+    "last_content_update" : 1497244991707,
+    "path" : "C:/Users/ASUS/Dropbox/R/R/hw5_elderly/hw5.Rmd",
+    "project_path" : "hw5.Rmd",
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

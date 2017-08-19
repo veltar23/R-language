@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all.names = TRUE))\n\n#1.library\nlibrary(tm)\nlibrary(tmcn)\nlibrary(Rwordseg)\nlibrary(jiebaR)\nlibrary(rJava)\nlibrary(SnowballC) # 似乎是上面某個套件的輔助\nlibrary(slam)  # 似乎是上面某個套件的輔助\n\n\n#2.get data\nm<-\"C:/Users/user/Dropbox/R/R/thesis/TM1\" #檔案路徑  \nmycorpus <- Corpus(DirSource(m),list(language = NA)) #讀取路徑下所有txt\n\nmycorpus <- tm_map(mycorpus, removePunctuation)\nmycorpus <- tm_map(mycorpus, stripWhitespace)\nmycorpus <- tm_map(mycorpus, removeNumbers)\nmycorpus <- tm_map(mycorpus, function(word) {\n  gsub(\"[A-Za-z0-9]\", \"\", word)\n})\n\n#3.斷詞\n\n\ncutter <- worker()\nmycorpus<- Corpus(VectorSource(mycorpus)) \nmycorpus<-as.character(mycorpus)\nmycorpus1<-segment(mycorpus,cutter)\n\n\nmycorpus2 <- Corpus(VectorSource(mycorpus1)) \n\n\nc<-data.frame(text = sapply(mycorpus2, as.character), stringsAsFactors = FALSE)\nwrite.table(c,file=\"data2\") #匯出檔案方便確認結果\n\n#4.停止詞\nmyStopWords <- c(toTrad(stopwordsCN()),\"一下\")\nmycorpus3 <- tm_map(mycorpus2, removeWords, myStopWords)\n\nc<-data.frame(text = sapply(mycorpus3, as.character), stringsAsFactors = FALSE)\nwrite.table(c,file=\"data2X\")\n\nmycorpus3 <- tm_map(mycorpus3, removePunctuation)\nmycorpus3 <- tm_map(mycorpus3, stripWhitespace)\nmycorpus3 <- tm_map(mycorpus3, removeNumbers)\nmycorpus4 <- tm_map(mycorpus3, function(word) {\n  gsub(\"[A-Za-z0-9]\", \"\", word)\n})\n\n\n\nlibrary(wordcloud)\ntdm <- TermDocumentMatrix(mycorpus3, control = list(wordLengths = c(2, Inf)))\n\nm1 <- as.matrix(tdm)\nv <- sort(rowSums(m1), decreasing = TRUE)\nd <- data.frame(word = names(v), freq = v)\nwordcloud(d$word, d$freq, min.freq = 10, random.order = F, ordered.colors = F, \n          colors = rainbow(length(row.names(m1))))\n\n",
+    "created" : 1502724062786.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2451464476",
+    "id" : "FE88F33C",
+    "lastKnownWriteTime" : 1502724060,
+    "last_content_update" : -2147483648,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

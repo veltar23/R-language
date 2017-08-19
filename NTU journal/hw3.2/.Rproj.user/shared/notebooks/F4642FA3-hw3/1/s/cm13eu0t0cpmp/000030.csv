@@ -1,0 +1,5 @@
+"0","library(knitr)"
+"0","result1 = summarise(df, mean(Grand.Total))"
+"0","colnames(result1) = c(""Area"",""Total"")"
+"0","rr1 <- result1[order(result1$Total, decreasing = TRUE),]"
+"0","kable(rr1)"

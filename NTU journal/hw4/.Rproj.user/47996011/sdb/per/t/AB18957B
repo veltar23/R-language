@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1498757289784.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AB18957B",
+    "lastKnownWriteTime" : 3419473787924512768,
+    "last_content_update" : 1498757289784,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "ED477D87",
+        "caption" : "weather",
+        "contentUrl" : "grid_resource/gridviewer.html?env=package%3Anycflights13&obj=weather&cache_key=ED477D87",
+        "displayedObservations" : 8719,
+        "environment" : "package:nycflights13",
+        "object" : "weather",
+        "preview" : 0,
+        "totalObservations" : 8719,
+        "variables" : 14
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\nlibrary(ggmap)\nlibrary(mapproj)\n\ndata<-read.csv(\"4.csv\",encoding = \"big-5\")\n\ndata$lon <- data$WGS84Lon\ndata$lat <- data$WGS84Lat\n\n\nmap <- get_map(location = 'Taiwan', zoom = 8)\nggmap(map) + \n  geom_point(aes(x = lon, y = lat, colour = factor(sd), size = ratio),\n             data = data)+\n  scale_size(range = c(3, 8))\n\n\nggmap(map) + \n  geom_point(aes(x = lon, y = lat, colour = factor(照服員照護人數), size = ratio),\n             data = data)+\n  scale_size(range = c(3, 8))",
+    "created" : 1496809239436.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "850765229",
+    "id" : "5111B95C",
+    "lastKnownWriteTime" : 1496844103,
+    "last_content_update" : 1496844103166,
+    "path" : "C:/Users/ASUS/Dropbox/R/R/final/fin.R",
+    "project_path" : "fin.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

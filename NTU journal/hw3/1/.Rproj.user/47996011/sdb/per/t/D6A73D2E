@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\nlibrary(plotly)\nrequire(stats)\n\nrawdata = read.csv('teacher.csv',\n                   header = TRUE)\ndelId = which(is.na(rawdata$Year) == TRUE)\nrawdata = rawdata[-delId,]\nrawdata[is.na(rawdata)] = 0\nlastyearId = length(rawdata$Year)\nfirstYear = rawdata$Year[1]\nlastYear = rawdata$Year[lastyearId]\nn = lastYear - firstYear + 1\nallType = names(rawdata)\nrownames(rawdata) <- 1:nrow(rawdata)\n\n# NerTbale is as follows:\n# year, people, type\n# 1950, 100, prof.\n# ...\n# 2010, 50, lecture\ntypeId = c(2:9)\nnewTable = data.frame()\nfor( nid in c(48:n) )\n{\n  year = as.matrix(rep(rawdata$Year[nid], length(rawdata[nid,typeId])))\n  people = as.matrix(as.numeric(rawdata[nid,typeId]))\n  type = as.matrix(as.character(allType[typeId]))\n  temp = cbind(year, log(people), type)\n  newTable = rbind(newTable, temp)\n}\nnames(newTable) = c('year', 'people', 'pos')\nnewTable = newTable[with(newTable, order(pos)),]\nrownames(newTable) <- 1:nrow(newTable)\n\np <- plot_ly(data = newTable, x = ~year, \n             y = ~people, color = ~pos) %>%\n     add_lines( yaxis = list(range = c(0,10)))\np\nhtmlwidgets::saveWidget(p, \"index.html\")",
+    "created" : 1493761860104.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4124754411",
+    "id" : "D6A73D2E",
+    "lastKnownWriteTime" : 1493763527,
+    "last_content_update" : 1493763527209,
+    "path" : "C:/Users/user/Dropbox/R/R/hw3/teacher.r",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,33 @@
+---
+title: "hw3.1"
+author: "r05741051_黃羽均"
+output: html_document
+---
+
+台灣高齡人口照護人力分析
+資料來源：衛生福利部 家庭及社會署 各項統計資料表；自製圖表
+
+隨著社會進步、醫藥發達，出生率及死亡率逐年降低，台灣老年人口的比例正大幅增加，高齡化社會已成為重大議題，所產生的現象與問題也逐漸浮現。就在台灣幾年後將從「高齡化社會」邁入「高齡社會」，如何維護高齡生活的品質與尊嚴，以及訂定健全的社會福利和健康政策，已是政府刻不容緩的挑戰。
+
+目前的照護人力是否能負荷高齡人口增加所帶來的壓力呢?
+
+目前高齡人口及照護人力的成長率為何？
+
+```{r}
+library(knitr)
+
+rdata=read.csv("growth.csv",header = TRUE)
+
+df <- rdata %>% group_by(End.of.Year)
+result1 = summarise(df, mean(Grand.Total), mean(Population))
+write.table(result1, "result1.csv",col.names = c("Year","Total","Population"))
+library(knitr)
+data = read.table('result1.csv')
+kable(data)
+
+p1<-mean(rdata$Population)
+t1<-mean(rdata$Grand.Total)
+
+
+```
+

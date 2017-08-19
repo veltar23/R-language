@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list = ls(all = TRUE))\nlibrary(png)\nlibrary(animation)\n\nrawData = read.csv(\"1.csv.csv\",header = FALSE)\n\nnames(rawData) <- c(\"年度\",\"攝護腺癌\",\"肺癌\",\"大腸直腸癌\",\"女性乳癌\",\"子宮頸癌\")\n\nsaveGIF(\nfor (yid in c(1:length(rawData[,1])))\n{\n  barplot(as.matrix(rawData[yid,c(-1)]),\n          main = paste0(rawData[yid,1], \"年 癌症發生率/每百萬人 \"),\n          ylim = c(0, max(rawData[,-1])))\n}, movie.name = \"1.gif\",\ninterval = 0.3,\nani.width = 1500,\nani.height = 600\n)",
+    "created" : 1489579189611.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "478057545",
+    "id" : "E215C8D7",
+    "lastKnownWriteTime" : 2478186459377789292,
+    "last_content_update" : 1489582486343,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

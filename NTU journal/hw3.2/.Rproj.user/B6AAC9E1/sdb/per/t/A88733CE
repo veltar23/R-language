@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list = ls(all=TRUE))\nlibrary(dplyr)\nrawdata = read.csv(\n  'AQXDaily_20170409211519.csv',\n  encoding = 'UTF-8')\n\ndf <- rawdata %>% group_by(X.U.FEFF.SiteId)\nresult1 = summarise(df, mean(SO2SubIndex), mean(COSubIndex))\nresult2 = rawdata %>% filter(PSI < 20)\n\n",
+    "created" : 1495455942559.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2206828532",
+    "id" : "A88733CE",
+    "lastKnownWriteTime" : 1495443176,
+    "last_content_update" : 1495443176,
+    "path" : "C:/Users/ASUS/Downloads/airpollution/airpollution/airPollution .R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

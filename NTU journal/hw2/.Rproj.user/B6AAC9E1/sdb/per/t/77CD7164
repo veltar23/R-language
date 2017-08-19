@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"hw2_elderly\"\nauthor: \"r05741051_黃羽均\"\ndate: \"2017年4月12日\"\noutput: html_document\n---\nPTT elderly版 資料爬蟲\n資料來源 ：PTT https://www.ptt.cc/bbs/elderly/index.html\n\n```{r}\nrm(list=ls(all.names=TRUE))\nlibrary(XML)\nlibrary(RCurl)\nlibrary(httr)\n\nurlPath <- \"https://www.ptt.cc/bbs/elderly/index33.html\"\ntemp    <- getURL(urlPath, encoding = \"big5\")\nxmldoc  <- htmlParse(temp)\ntitle   <- xpathSApply(xmldoc, \"//div[@class=\\\"title\\\"]\", xmlValue)\nauthor  <- xpathSApply(xmldoc, \"//div[@class='author']\", xmlValue)\ndate    <- xpathSApply(xmldoc, \"//div[@class='date']\", xmlValue)\nresponse<- xpathSApply(xmldoc, \"//div[@class='nrec']\", xmlValue)\n\nalldata <- data.frame(title, author, date, response)\n\nwrite.table(alldata,\"pttelderly.csv\") \n\n```\n\n```{r}\n\nlibrary(knitr)\ndata=read.table(\"pttelderly.csv\")\nkable(data)\n```\n\n",
+    "created" : 1491965842437.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1076052471",
+    "id" : "77CD7164",
+    "lastKnownWriteTime" : 1491967067,
+    "last_content_update" : 1491967067388,
+    "path" : "C:/Users/ASUS/Dropbox/R/R/hw2/hw2.Rmd",
+    "project_path" : "hw2.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

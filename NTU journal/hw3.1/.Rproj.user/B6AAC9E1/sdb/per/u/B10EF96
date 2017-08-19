@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all=TRUE))\nlibrary(plotly)\nlibrary(ggplot2)\nrequire(stats)\nlibrary(knitr)\n\nrdata=read.csv(\"growth.csv\",header = TRUE)\n\ndf <- rdata %>% group_by(End.of.Year)\nresult1 = summarise(df, mean(Grand.Total), mean(Population))\nwrite.table(result1, file=\"result1.csv\")\nlibrary(knitr)\ndata = read.table(\"result1.csv\")\nkable(data)\n\np1<-mean(rdata$Population)\nt1<-mean(rdata$Grand.Total)\n\n\n\n\n\nresult2 = rdata %>% filter(Nursing.Staff < 20)\n\n",
+    "created" : 1495440077036.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4072208002",
+    "id" : "B10EF96",
+    "lastKnownWriteTime" : 7226435094589303907,
+    "last_content_update" : 1495454441184,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

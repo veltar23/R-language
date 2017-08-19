@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n\n##### text mining and word cloud using tm, tmcn, jiebaR #####\n\n### 1. install packages (you can skip if you already have packages installed)\n\nrm(list=ls(all.names = TRUE))\n\n### 2. load the library and source the modified .R file\n###    modifiedTermDocumentMatrix.R 解決tm 套件中處理中文編碼遇到的問題\nlibrary(jiebaR)\nlibrary( tm ) # Text Mining Package\nlibrary( Rwordseg ) #中文斷詞\nlibrary( tmcn ) #處理中文字的輔助套件\nlibrary( wordcloud ) # Word Clouds\nlibrary( colorspace ) # Color Space Manipulation\n\nsource(\"C:/Users/user/Dropbox/R/R/data mining/HK_NPC_post1\") # 讀入修改的檔案, ...為存放該檔案的路徑\n\n\n### 3. 用tm,tmcn 斷詞\n\n\n#   3.1 讀取ptt資料夾下的所有文章\n#       (如果ptt資料夾沒有放在工作目錄下,則DirSource裡面需放絕對路徑 ex: \"C:/Users/.../ptt\")\nHK_NPC_jb <-  Corpus( DirSource() ,list(language = NA))\n\n#   3.2 前處理\nHK_NPC_jb <-  tm_map(HK_NPC_jb, stripWhitespace ) # 去掉空白\nHK_NPC_jb <-  tm_map( HK_NPC_jb, removePunctuation ) # 去掉標點\nHK_NPC_jb <-  tm_map( HK_NPC_jb, removeNumbers ) # 去掉數字\nHK_NPC_jb <-  tm_map( HK_NPC_jb,function( word ){ gsub( \"[A-Za-z0-9]\", \"\", word)}) # 去掉英文跟數字\n\n#   3.3 從停用詞詞庫把一些不想要、無意義的冗詞去掉\nHK_NPC_jb <- toTrad(stopwordsCN()) # stopwordCN()是簡體字，用toTrad()轉成繁體\nHK_NPC_jb2 <-  tm_map( HK_NPC_jb, removeWords, StopWords ) # 從pttData中含有StopWords的文字移除\n\n# StopWords <-  c(StopWords, \"朝聖\") # 更新停用詞詞庫\n# pttData2 <-  tm_map( pttData, removeWords, StopWords ) 更新完後要重新執行移除\n\n\n#   3.4 斷詞結果\npttData_sep <- tm_map( pttData2, segmentCN , nature = TRUE,returnType='tm') \n\n#   3.5 用修改過的TermDocumentMatrixCN()來建立詞頻矩陣\ntdm <- TermDocumentMatrixCN(pttData_sep, control=list(wordLengths = c(2,Inf)))\ninspect(tdm) # 檢查結果\nfindFreqTerms(tdm, 30) # 把超過30次的字列出來\n\n#   3.6 斷詞後取出名詞\npttData_cloud = tm_map( pttData2, PlainTextDocument ) # 把20篇文章放在一個陣列裡\npttData_cloud= segmentCN( pttData_cloud[[1]]$content, nature = TRUE) # 斷詞\npttData_cloud = unlist( pttData_cloud ) # 把所有斷好的詞取出來\nnoun = pttData_cloud[ names ( pttData_cloud ) == \"n\" ] # 取出名詞\ntab = table( noun )\nData = as.data.frame( tab[ tab >= 1 ] ) # 名詞的頻率出現矩陣\n\n#   3.7 做文字雲\nwordcloud(\n    words = Data$noun, freq = Data$Freq,\n    min.freq =8,\n    random.order = F, ordered.colors = T, \n    scale=c(8,.3),\n    #scale=c(9,.8),\n    colors = rainbow_hcl( nrow( Data ) )\n)\n\n\n### 4 jiebaR 作法\n\n#   4.1 前處理: 流程跟上面相同\npttData_jb <-  Corpus( DirSource( \"ptt\") ,list(language = NA))\npttData_jb <-  tm_map( pttData_jb, stripWhitespace ) # 去掉空白\npttData_jb <-  tm_map( pttData_jb, removePunctuation ) # 去掉標點\npttData_jb <-  tm_map( pttData_jb, removeNumbers ) # 去掉數字\npttData_jb <-  tm_map( pttData_jb,function( word ){ gsub( \"[A-Za-z0-9]\", \"\", word)}) # 去掉英文跟數字\npttData_jb <-  tm_map( pttData_jb, PlainTextDocument ) # 把20篇文章放在一個陣列裡\npttData_jb <- paste0(pttData_jb[[1]]$content,collapse = \"\") # 把陣列中的內容(20篇文章)全部連在一起\n\ncut <- worker() # 普通的結巴斷詞環境\ncut_ptt <- cut[pttData_jb] # 把整理好的文章放到cut中做斷詞\ntab = table( cut_ptt )\nData_jb = as.data.frame( tab[ tab >= 1 ] ) # 結巴的斷詞結果\n\n#   4.2 後續也可以針對 Data_jb 做文字雲,參考3.7\n\n#   4.3 補充: jiebaR keywords\ncut_key <- worker(\"keywords\",topn=20) # 設定參數為keywords, 並計算前20個重要的關鍵字\ncut_key[pttData_jb] # 找出關鍵字\n\n\n",
+    "created" : 1502234951086.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2550233773",
+    "id" : "881EE71",
+    "lastKnownWriteTime" : 1502238277,
+    "last_content_update" : 1502238277150,
+    "path" : "C:/Users/user/Downloads/text_mining.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

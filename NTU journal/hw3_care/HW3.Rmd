@@ -1,0 +1,63 @@
+---
+title: "HW3"
+author: "r05741051_黃羽均"
+output: html_document
+---
+
+資料來源：衛生福利部 家庭及社會署 各項統計資料表
+http://www.sfaa.gov.tw/SFAA/Pages/Detail.aspx?nodeid=358&pid=3135
+
+隨著社會進步、醫藥發達，出生率及死亡率逐年降低，台灣老年人口的比例正大幅增加，高齡化社會已成為重大議題，所產生的現象與問題也逐漸浮現。就在台灣幾年後將從「高齡化社會」邁入「高齡社會」，如何維護高齡生活的品質與尊嚴，以及訂定健全的社會福利和健康政策，已是政府刻不容緩的挑戰。
+
+下圖是台灣老人長期照護機構工作人員的數量：
+
+```{r}
+rdata<-read.csv("1.csv",header = TRUE)
+
+plot(rdata$Year,rdata$Total,xlab = "Year",ylab ="Total",ylim = c(0,22000))
+lines(rdata$Year,rdata$Administrators,col="red")
+lines(rdata$Year,rdata$Nursing.Staff,col="blue")
+lines(rdata$Year,rdata$Social.Workers,col="green")
+lines(rdata$Year,rdata$Serviceman,col="yellow")
+```
+
+整體來說，全數呈現上揚的走勢，以下就各項的成長率作分析：
+
+```{r}
+
+gdata<-read.csv("2.csv",header = TRUE)
+
+vect<-c(-0.1,0.4)
+
+plot(gdata$Year,gdata$Total, ,ylim = vect)
+lines(gdata$Year,gdata$Administrators,col="red")
+lines(gdata$Year,gdata$Nursing.Staff,col="blue")
+lines(gdata$Year,gdata$Social.Workers,col="green")
+lines(gdata$Year,gdata$Serviceman,col="yellow")
+```
+
+各職務在近年間的成長為何？
+哪一個工作的人力成長率最高?
+
+```{r}
+m<-data.frame(mean(gdata$Total),
+              mean(gdata$Administrators),
+              mean(gdata$Nursing.Staff),
+              mean(gdata$Social.Workers),
+              mean(gdata$Serviceman))
+print(m)
+```
+
+在高齡照護的人力當中，增加最快的是社工人員、服務人員及護理人員。
+
+分析護理人員增長指其他因素關係
+```{r}
+n1<-cor(gdata$Nursing.Staff,gdata$Total)
+n2<-cor(gdata$Nursing.Staff,gdata$Administrators)
+n3<-cor(gdata$Nursing.Staff,gdata$Social.Workers)
+n4<-cor(gdata$Nursing.Staff,gdata$Serviceman)
+nn<-data.frame(n1,n2,n3,n4)
+print(nn)
+```
+
+護理師增長率與整體(n1)呈現正相關，與服務人員相關係數(n4)相對較低

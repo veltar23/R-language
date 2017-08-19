@@ -1,0 +1,18 @@
+"0","library(ggplot2)"
+"2","There were 42 warnings (use warnings() to see them)"
+"2","
+"
+"0","library(ggmap)"
+"0","library(mapproj)"
+"0","data<-read.csv(""4.csv"",encoding = ""big-5"")"
+"0","data$lon <- data$WGS84Lon"
+"0","data$lat <- data$WGS84Lat"
+"0","map <- get_map(location = 'Taiwan', zoom = 8)"
+"2","Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=Taiwan&zoom=8&size=640x640&scale=2&maptype=terrain&language=en-EN&sensor=false
+"
+"2","Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=Taiwan&sensor=false
+"
+"0","ggmap(map) + "
+"0","  geom_point(aes(x = lon, y = lat, colour = factor(sd), size = ratio),"
+"0","             data = data)+"
+"0","  scale_size(range = c(3, 8))"

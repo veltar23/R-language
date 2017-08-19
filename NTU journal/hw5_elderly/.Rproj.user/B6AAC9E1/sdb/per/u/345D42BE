@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all.names = TRUE))\nlibrary(tmcn)\nlibrary(rvest)\nlibrary(xml2)\nURL = \"https://www.ptt.cc/bbs/elderly/index.html\"\nhtml = read_html(URL)\ntitle = html_nodes(html,\"a\")\nhref = html_attr(title,\"href\")\ndata = data.frame(title = toUTF8(html_text(title)),href = href)\n\n#去掉不需要的資訊\ndata = data[-c(1:10),]\n\ngetContent <- function(href){\n  subURL = paste0(\"https://www.ptt.cc\",href)\n  subhtml = read_html(subURL)\n  content = html_nodes(subhtml,\"div#main-content.bbs-screen.bbs-content\")\n  return(toUTF8(html_text(content)))\n}\n\nallText = sapply(data$href,getContent)\nallText\nwrite.table(allText,\"mydata.txt\") # 儲存成 .txt 檔 \n",
+    "created" : 1497199012592.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "48486953",
+    "id" : "345D42BE",
+    "lastKnownWriteTime" : 2478186459377789292,
+    "last_content_update" : 1497241485048,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

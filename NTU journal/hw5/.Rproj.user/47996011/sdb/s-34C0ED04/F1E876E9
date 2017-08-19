@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all.names = TRUE))\nlibrary(NLP)\nlibrary(tm)\nlibrary(jiebaRD)\nlibrary(jiebaR)\nlibrary(RColorBrewer)\nlibrary(wordcloud)\n\nfilenames <- list.files(getwd(), pattern=\"*.txt\")\nfiles <- lapply(filenames, readLines)\n\ndocs <- Corpus(VectorSource(files)) #Corpus是一種文字檔資料格式--文本\n# 移除可能有問題的符號\n# content_transformer  為內文取代 function\ntoSpace <- content_transformer(function(x, pattern) {\n  return (gsub(pattern, \" \", x))\n}\n)\n\n# 複製文本中你不要的符號刪除，可寫多行刪除多種符號\ndocs <- tm_map(docs, toSpace, \"文本中你不要的符號貼於此\")\ndocs <- tm_map(docs, toSpace, \"[a-zA-Z]\")\n\n# 移除標點符號 (punctuation)\n# 移除數字跟空白 (digits / white space)\n\ndocs <- tm_map(docs, removePunctuation)\ndocs <- tm_map(docs, removeNumbers)\ndocs <- tm_map(docs, stripWhitespace)\ndocs <- tm_map(docs, toSpace, \"的\")\ndocs <- tm_map(docs, toSpace, \"有\")\ndocs <- tm_map(docs, toSpace, \"是\")\ndocs <- tm_map(docs, toSpace, \"也\")\ndocs <- tm_map(docs, toSpace, \"在\")\ndocs <- tm_map(docs, toSpace, \"踢踢\")\ndocs <- tm_map(docs, toSpace, \"看板\")\ndocs <- tm_map(docs, toSpace, \"發信站\")\ndocs <- tm_map(docs, toSpace, \"批\")\ndocs <- tm_map(docs, toSpace, \"都\")\ndocs <- tm_map(docs, toSpace, \"了\")\ndocs <- tm_map(docs, toSpace, \"不\")\n\n\n\n# 語詞詞幹化(stemmization)\n# 以英文為例\n#https://zh.wikipedia.org/wiki/%E8%AF%8D%E5%B9%B2%E6%8F%90%E5%8F%96\n#library(SnowballC)\n#確保任何形式的單字只會轉換成相同詞性出現一次\n#docs <- tm_map(docs, stemDocument)\nmixseg = worker()\njieba_tokenizer=function(d){\n  unlist(segment(d[[1]],mixseg))\n}\nseg = lapply(docs, jieba_tokenizer)\nfreqFrame = as.data.frame(table(unlist(seg)))\n\n\nwordcloud(freqFrame$Var1,freqFrame$Freq,\n          scale=c(5,0.1),min.freq=50,max.words=150,\n          random.order=TRUE, random.color=FALSE, \n          rot.per=.1, colors=brewer.pal(8, \"Dark2\"),\n          ordered.colors=FALSE,use.r.layout=FALSE,\n          fixed.asp=TRUE)\n",
+    "created" : 1497193551732.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2391778920",
+    "id" : "F1E876E9",
+    "lastKnownWriteTime" : 13229676095799416,
+    "last_content_update" : 1497194222790,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled3"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

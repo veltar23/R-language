@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Final\"\nauthor: \"r05741051_黃羽均\"\ndate: \"2017年6月7日\"\noutput: html_document\n---\n高齡化來襲，各縣市政府準備好了嗎？\n\n\t因應超高齡化的社會議題，衛生福利部推出了長期照護十年計劃。政府訂立了一系列規章及輔助辦法等以協助高齡國民的生活。在這個架構當中，地方縣市政府的配合是不可或缺的一環。中央訂立規則並在預算上給予協助，但長照十年計劃的第一線仍是各縣市政府。\n\t面對高齡化的壓力，各縣市政府是不是準備好了呢？現有的照護資源是否能足夠支持各縣市的高齡照護？本文就各縣市人口高齡化的程度對安養機構床數缺口及照護人力來做分析。\n\n\t下圖為台灣各縣市高齡化程度及照護資源分配的視覺化圖表。每個點代表所在位置之縣市，點的大小則和高齡化程度呈正相關，圖上的點越大，代表高齡化的議題越加嚴峻，需要地方政府投注更多心力，如圖中最大的三個點：嘉義縣、雲林縣及南投縣。\n\n```{r}\nlibrary(ggplot2)\nlibrary(ggmap)\nlibrary(mapproj)\n\ndata<-read.csv(\"4.csv\",encoding = \"big-5\")\n\ndata$lon <- data$WGS84Lon\ndata$lat <- data$WGS84Lat\n\n\nmap <- get_map(location = 'Taiwan', zoom = 8)\nggmap(map) + \n  geom_point(aes(x = lon, y = lat, colour = factor(sd), size = ratio),\n             data = data)+\n  scale_size(range = c(3, 8))\n```\n\n\n\t點的顏色代表該縣市照護機構的空床數。該數值是由該縣市各照護機構所能容納的人數減去各縣市失能長者人數而得。配合旁列圖例可以看出各縣市長照病床的缺口。\n\t前述高齡化縣市雲林及嘉義的空床數量都不樂觀。且值得一提的是，照護病床缺額最高的地區是台北市，高雄市次之，顯示都市地區之高齡長照議題也不容小覷。\n\n```{r}\n\nggmap(map) + \n  geom_point(aes(x = lon, y = lat, colour = factor(照服員照護人數), size = ratio),\n             data = data)+\n  scale_size(range = c(3, 8))\n```\n\n\n\n\t點的顏色代表每個照服員照護的人數（以總床數計）。高齡化嚴重的雲林縣在照護人力上相對充足。照護人力缺口最大的地區為交通相對困難的離島澎湖及山地南投。\n",
+    "created" : 1496844617278.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "948107280",
+    "id" : "A240C59C",
+    "lastKnownWriteTime" : 1496844756,
+    "last_content_update" : 1496844756739,
+    "path" : "C:/Users/ASUS/Dropbox/R/R/final/T1.Rmd",
+    "project_path" : "T1.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

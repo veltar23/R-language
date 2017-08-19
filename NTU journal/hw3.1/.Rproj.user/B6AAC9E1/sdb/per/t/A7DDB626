@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"hw3.1\"\nauthor: \"r05741051_黃羽均\"\noutput: html_document\n---\n\n台灣高齡人口照護人力分析\n資料來源：衛生福利部 家庭及社會署 各項統計資料表；自製圖表\n\n隨著社會進步、醫藥發達，出生率及死亡率逐年降低，台灣老年人口的比例正大幅增加，高齡化社會已成為重大議題，所產生的現象與問題也逐漸浮現。就在台灣幾年後將從「高齡化社會」邁入「高齡社會」，如何維護高齡生活的品質與尊嚴，以及訂定健全的社會福利和健康政策，已是政府刻不容緩的挑戰。\n\n目前的照護人力是否能負荷高齡人口增加所帶來的壓力呢?\n\n目前高齡人口及照護人力的成長率為何？\n\n```{r}\nlibrary(knitr)\n\nrdata=read.csv(\"growth.csv\",header = TRUE)\n\ndf <- rdata %>% group_by(End.of.Year)\nresult1 = summarise(df, mean(Grand.Total), mean(Population))\nwrite.table(result1, \"result1.csv\",col.names = c(\"Year\",\"Total\",\"Population\"))\nlibrary(knitr)\ndata = read.table('result1.csv')\nkable(data)\n\np1<-mean(rdata$Population)\nt1<-mean(rdata$Grand.Total)\n\n\n```\n\n",
+    "created" : 1495452523761.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2686053968",
+    "id" : "A7DDB626",
+    "lastKnownWriteTime" : 1495455047,
+    "last_content_update" : 1495455047688,
+    "path" : "C:/Users/ASUS/Dropbox/R/R/hw3.1/hw3.1",
+    "project_path" : "hw3.1",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}

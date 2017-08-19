@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all.names = TRUE))\nlibrary(NLP)\nlibrary(tm)\nlibrary(jiebaRD)\nlibrary(jiebaR)\nlibrary(RColorBrewer)\nlibrary(wordcloud)\nlibrary(tm)\nlibrary(tmcn)\nlibrary(jiebaR)\nlibrary(rvest)\nlibrary(NLP)\nlibrary(tm)\nlibrary(jiebaRD)\nlibrary(jiebaR)\nlibrary(RColorBrewer)\nlibrary(wordcloud)\n\nfilenames <- list.files(getwd(), pattern=\"*.txt\")\nfiles <- lapply(filenames, readLines)\n\ndocs <- Corpus(VectorSource(files)) \n\ntoSpace <- content_transformer(function(x, pattern) {\n  return (gsub(pattern, \" \", x))\n}\n)\n\nsw <- toTrad(stopwordsCN())\n\ndocs <- tm_map(docs, toSpace, sw)\ndocs <- tm_map(docs, toSpace, \"有\")\ndocs <- tm_map(docs, toSpace, \"在\")\ndocs <- tm_map(docs, toSpace, \"是\")\ndocs <- tm_map(docs, toSpace, \"也\")\n\n\n\ndocs <- tm_map(docs, removePunctuation)\ndocs <- tm_map(docs, removeNumbers)\ndocs <- tm_map(docs, stripWhitespace)\n\nwrite.table(docs, file=\"C:/Users/user/Dropbox/R/R/data mining/datan1\")\n\n\nmixseg = worker()\njieba_tokenizer=function(d){\n  unlist(segment(d[[1]],mixseg))\n}\nseg = lapply(docs, jieba_tokenizer)\nfreqFrame = as.data.frame(table(unlist(seg)))\n\n\n\nwordcloud(freqFrame$Var1,freqFrame$Freq,\n          scale=c(5,0.1),min.freq=50,max.words=150,\n          random.order=TRUE, random.color=FALSE, \n          rot.per=.1, colors=brewer.pal(8, \"Dark2\"),\n          ordered.colors=FALSE,use.r.layout=FALSE,\n          fixed.asp=TRUE)",
+    "created" : 1502236802132.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2264397364",
+    "id" : "F5DCFCA0",
+    "lastKnownWriteTime" : 30962698416947305,
+    "last_content_update" : 1502238424435,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

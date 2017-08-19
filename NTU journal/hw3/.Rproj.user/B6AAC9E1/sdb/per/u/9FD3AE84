@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list = ls(all=TRUE))\nlibrary(dplyr)\nrawdata = read.csv(\n  'AQXDaily_20170409211519.csv',\n  encoding = 'UTF-8')\n\ndf <- rawdata %>% group_by(X.U.FEFF.SiteId)\nresult1 = summarise(df, mean(SO2SubIndex), mean(COSubIndex))\nresult2 = rawdata %>% filter(PSI < 20)\n\n",
+    "created" : 1491968157885.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2206828532",
+    "id" : "9FD3AE84",
+    "lastKnownWriteTime" : 31244048835477601,
+    "last_content_update" : 1491968386018,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

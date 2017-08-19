@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "answer01 <- local({\n  # 請在此填寫你的程式碼\n  slice(flights, 1:100) %>%\n    select(year:day, hour, origin, dest, tailnum, carrier) %>%\n    left_join(y = airlines, by = \"carrier\")\n})\n# 結束之後請回到console輸入`submit()`",
+    "created" : 1498755988877.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3634456595",
+    "id" : "F18D6C5A",
+    "lastKnownWriteTime" : 1498756108,
+    "last_content_update" : 1498756108066,
+    "path" : "C:/Users/user/AppData/Local/Temp/RtmpcvQRoG/RDataEngineer-06-01.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

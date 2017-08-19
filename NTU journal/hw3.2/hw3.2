@@ -1,0 +1,56 @@
+---
+title: "103 台灣高齡人口照護人力分析"
+author: "r05741051_黃羽均"
+output: html_document
+---
+
+隨著社會進步、醫藥發達，出生率及死亡率逐年降低，台灣老年人口的比例正大幅增加，高齡化社會已成為重大議題，所產生的現象與問題也逐漸浮現。就在台灣幾年後將從「高齡化社會」邁入「高齡社會」，如何維護高齡生活的品質與尊嚴，以及訂定健全的社會福利和健康政策，已是政府刻不容緩的挑戰。
+
+
+
+載入各縣市照護人力資料
+```{r}
+rdata = read.csv('1.csv',
+                   header = TRUE)
+
+df <- rdata %>% group_by(Area)
+```
+
+
+整體而言，目前各縣市的照護人力是如何分布的?
+```{r}
+
+library(knitr)
+
+result1 = summarise(df, mean(Grand.Total))
+colnames(result1) = c("Area","Total")
+rr1 <- result1[order(result1$Total, decreasing = TRUE),]
+kable(rr1)
+
+
+```
+在全台各縣市中，連江縣、宜蘭縣、基隆縣三縣市的照護人力最高。
+每千人照護人力分別是122.7,105.78,96.54人。
+
+
+平均每千名失能老人中，各類型的照護人力有多少人呢?
+```{r}
+result2 = colMeans(df[ ,2:7])
+print(result2)
+```
+
+根據平均照護人力，分析各縣市之護理人力，有哪幾個縣市是低於平均值?
+
+```{r}
+
+library(knitr)
+
+result3 = rdata %>% filter(Nursing.Staff < 9.666818)
+rr3<- result3[order(result3$Nursing.Staff),]
+kable(rr3)
+```
+護理人力最吃緊的縣市分別為澎湖縣、苗栗縣及新竹縣。
+
+
+台灣高齡人口照護人力分析
+資料來源：衛生福利部 家庭及社會署 各項統計資料表

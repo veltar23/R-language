@@ -1,0 +1,8 @@
+"0","library(knitr)"
+"0","rdata=read.csv(""growth.csv"",header = TRUE)"
+"0","df <- rdata %>% group_by(End.of.Year)"
+"0","result1 = summarise(df, mean(Grand.Total), mean(Population))"
+"0","write.table(result1, ""result1.csv"",col.names = c(""Year"",""Total"",""Population""))"
+"0","library(knitr)"
+"0","data = read.table('result1.csv')"
+"0","kable(data)"

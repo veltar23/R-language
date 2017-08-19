@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\nlibrary(plotly)\nrequire(stats)\n\nrdata=read.csv(\"1.csv\",header = TRUE)\n\nx<-rdata$Year\ny1<-rdata$Total\ny2<-rdata$Administrators\ny3<-rdata$Nursing.Staff\ny4<-rdata$Social.Workers\ny5<-rdata$Serviceman\n\nplot(x, y1, type = \"l\",ylim=c(0,22000))\nlines(x, y2, col = \"blue\")\nlines(x, y3, col = \"red\")\nlines(x, y4, col = \"green\")\nlines(x, y5, col = \"yellow\")\n\ngdata<-read.csv(\"2.csv\",header = TRUE)\n",
+    "created" : 1494865637805.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3020988483",
+    "id" : "F3BD10BF",
+    "lastKnownWriteTime" : 23644241645338700,
+    "last_content_update" : 1494950788440,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

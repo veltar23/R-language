@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tmcn)\nlibrary(rvest)\npttTestFunction <- function(URL, filename)\n{\n  #URL   = \"https://www.ptt.cc/bbs/elderly/index.html\"\n  html  = read_html(URL)\n  title = html_nodes(html, \"a\")\n  href  = html_attr(title, \"href\")\n  data = data.frame(title = toUTF8(html_text(title)),\n                    href = href)\n  data = data[-c(1:10),]\n  getContent <- function(x) {\n    url  = paste0(\"https://www.ptt.cc\", x)\n    tag  = html_node(read_html(url), 'div#main-content.bbs-screen.bbs-content')\n    text = toUTF8(html_text(tag))\n  }\n  #getContent(data$href[1])\n  allText = sapply(data$href, getContent)\n  allText\n  #out <- file(filename, \"w\", encoding=\"BIG-5\") \n  write.table(allText, filename) \n  #close(out) \n}\n\n",
+    "created" : 1497241959572.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1195592551",
+    "id" : "B46E0794",
+    "lastKnownWriteTime" : 5292976843906638626,
+    "last_content_update" : 1497243391028,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

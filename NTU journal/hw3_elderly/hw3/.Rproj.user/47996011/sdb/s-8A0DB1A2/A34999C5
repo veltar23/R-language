@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "file = 'data/newTable.RData'\nload(file)\n\n# 計算相關係數\nrho = cor(rawdata)\n\n# 看資料基本統計\nsummary(rawdata)\nsummary(newTable)\n\nrawdata$Year[which(rawdata$Prof. == max(rawdata$Prof.))]\n\ndiff = rawdata[2:length(rawdata$Year),] - rawdata[1:(length(rawdata$Year)-1),]\ndiff = diff[,-1]\nrhodiff = cor(diff)\n\nresult = lm(rawdata$Prof. ~ rawdata$Lecture)\nplot(rawdata$Lecture, rawdata$Prof., pch = 16, cex = 1.3, col = \"blue\",\n     xlab = \"Lecture\", ylab = \"Prof.\")\nabline(result)\nplot(diff)\n\nrequire(coefplot)\nresult2 = lm(Prof. ~ AssProf.+Prof.Outside-1, rawdata)\ncoefplot(result2, xlab = '估計值', ylab = '迴歸變項', \n         title = '反應變項 = Prof.人數')",
+    "created" : 1493767308299.000,
+    "dirty" : false,
+    "encoding" : "BIG5",
+    "folds" : "",
+    "hash" : "4022465831",
+    "id" : "A34999C5",
+    "lastKnownWriteTime" : 1492504578,
+    "last_content_update" : 1492504578,
+    "path" : "C:/Users/user/AppData/Local/Temp/Rar$DIa0.772/twoVar.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"hw1_cancer\"\nauthor: \"r05741051_黃羽均\"\ndate: \"2017年3月15日\"\noutput: html_document\n---\n\n台灣歷年惡性腫瘤發生率\n\n資料來源：衛生福利部 國民健康署 癌症登記資料庫。\n\n\n```{r}\nrm(list = ls(all = TRUE))\nlibrary(png)\nlibrary(animation)\n\nrawData = read.csv(\"1.csv.csv\",header = FALSE)\n\nnames(rawData) <- c(\"年度\",\"攝護腺癌\",\"肺癌\",\"大腸直腸癌\",\"女性乳癌\",\"子宮頸癌\")\n\nfor (yid in c(1:length(rawData[,1])))\n{\n  barplot(as.matrix(rawData[yid,c(-1)]),\n          main = paste0(rawData[yid,1], \"年 癌症發生率/每百萬人 \"),\n          ylim = c(0, max(rawData[,-1])))\n}\n\nsaveGIF(\nfor (yid in c(1:length(rawData[,1])))\n{\n  barplot(as.matrix(rawData[yid,c(-1)]),\n          main = paste0(rawData[yid,1], \"年 癌症發生率/每百萬人 \"),\n          ylim = c(0, max(rawData[,-1])))\n}, movie.name = \"1.gif\",\ninterval = 0.3,\nani.width = 1500,\nani.height = 600\n)\n```\n\n ## 國人癌症時鐘持續快轉，2016年每5分鐘18秒就有1人罹癌，比前一年快了8秒。\n\n癌症時鐘持續加快，令人擔心自己是否是癌症危險人口。在這個疑問上，數字能告訴我們什麼呢？\n\nhttps://veltar23.github.io/R/hw1_cancer/1.gif\n",
+    "created" : 1489581527927.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4250733655",
+    "id" : "9338CAE6",
+    "lastKnownWriteTime" : 1489582740,
+    "last_content_update" : 1489582740519,
+    "path" : "~/R/R/hw1_cancer/1.Rmd",
+    "project_path" : "1.Rmd",
+    "properties" : {
+        "last_setup_crc32" : "",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

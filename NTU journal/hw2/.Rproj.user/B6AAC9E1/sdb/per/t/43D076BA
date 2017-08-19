@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all.names=TRUE))\nlibrary(XML)\nlibrary(RCurl)\nlibrary(httr)\n\nurlPath <- \"https://www.ptt.cc/bbs/elderly/index33.html\"\ntemp    <- getURL(urlPath, encoding = \"big5\")\nxmldoc  <- htmlParse(temp)\ntitle   <- xpathSApply(xmldoc, \"//div[@class=\\\"title\\\"]\", xmlValue)\nauthor  <- xpathSApply(xmldoc, \"//div[@class='author']\", xmlValue)\ndate    <- xpathSApply(xmldoc, \"//div[@class='date']\", xmlValue)\nresponse<- xpathSApply(xmldoc, \"//div[@class='nrec']\", xmlValue)\n\nalldata <- data.frame(title, author, date, response)\n\nwrite.table(alldata,\"pttelderly.csv\") #你會在此Script資料夾下得到一個.csv\n\nlibrary(knitr)\ndata=read.table(\"pttelderly.csv\")\nkable(data)",
+    "created" : 1491961733402.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2666050840",
+    "id" : "43D076BA",
+    "lastKnownWriteTime" : 1491966313,
+    "last_content_update" : 1491966313745,
+    "path" : "C:/Users/ASUS/Dropbox/R/R/hw2/hw2.R",
+    "project_path" : "hw2.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "rm(list=ls(all.names = TRUE))\n\nlibrary(jiebaR)#加載包\ncutter=worker()#設置分詞引擎\ncontent=read.csv(\"HK_NPC_post7.csv\")#這是內容，大家自己複製文章就行，這裡就不展示了\"\nsegWords<-segment(content,cutter)#對文本進行分詞處理\n\nf<-readLines('stop.txt')###讀取停止詞\nstopwords<-c(NULL)\nfor(i in 1:length(f))\n{\n  stopwords[i]<-f[i]\n}\nsegWords<-filter_segment(segWords,stopwords)#去除中文停止詞\n\nsegWords<-gsub(\"[0-9a-zA-Z]+?\",\"\",segWords)###去除數字和英文\nlibrary(stringr)#加載stringr包\nsegWords<-str_trim(segWords)#去除空格",
+    "created" : 1502283780835.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1837446687",
+    "id" : "EA6045B2",
+    "lastKnownWriteTime" : 7886403419288642163,
+    "last_content_update" : 1502285024645,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
