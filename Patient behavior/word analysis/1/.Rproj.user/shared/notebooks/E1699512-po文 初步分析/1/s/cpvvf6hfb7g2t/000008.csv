@@ -1,0 +1,17 @@
+"0","library(dplyr)"
+"2","Warning message:
+"
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"
+"0","library(lubridate)"
+"0","library(plyr)"
+"0","## read data"
+"0","test<-read.csv(""post.csv"", stringsAsFactors=FALSE)"
+"0","## 分析發文次數"
+"0","post = as.data.frame(table(test$author,dnn = ""author""))"
+"0","post<-arrange(post,Freq,decreasing=T)"
+"0","count_table=as.data.frame(table(table(test$author,dnn = ""author"")))"
+"0","print(count_table)"

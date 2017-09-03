@@ -1,0 +1,5 @@
+"0","##畫圖"
+"0","hist(post$Freq,"
+"0","     breaks = c(1:max(post[,2])),"
+"0","     main = ""Histogram of post"","
+"0","     xlab = ""Frequency in about 5 month"")"
